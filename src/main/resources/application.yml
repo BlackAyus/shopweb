@@ -1,0 +1,27 @@
+spring:
+  #資料庫連接
+  datasource:
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://localhost:3306/db01
+     username: root
+     password: hsp 
+  #檔案上傳限制   
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB      
+
+#Mybatis設定     
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true   
+    
+#開啟事務管理日誌
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug   
+    
+server:
+  port: 8080
+     
