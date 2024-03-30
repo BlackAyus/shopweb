@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.justshop.mapper.ProductMapper">
+ 
+    <select id="pageList" resultType="com.justshop.pojo.ProductVo">
+        SELECT p.* , c.cate_name FROM product p LEFT JOIN procate c ON p.cate_id = c.cate_id
+       
+        <where>
+             <if test="proName != null">and p.pro_name like concat('%',#{proName},'%')</if>
+             
+             <if test="cateId != null">and p.cate_id = #{cateId}</if>
+             
+              <if test="status != null">and p.status = #{status}</if>
+             
+        </where>
+          order by p.create_time desc
+    
+    </select>
+ 
+ 
+ </mapper>

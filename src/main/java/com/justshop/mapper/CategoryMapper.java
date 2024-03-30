@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.justshop.anno.AutoFill;
+import com.justshop.pojo.OperationType;
 import com.justshop.pojo.ProCategory;
 import com.justshop.pojo.Product;
 
@@ -22,10 +24,12 @@ public interface CategoryMapper {
 	void delete(Integer cateId);
 
 	//新增商品分類
-	@Insert("insert into procate(cate_name,create_time,update_time,pro_status) values(#{cateName},#{createTime},#{updateTime},#{proStatus}) ")
-	void add(ProCategory s);
+    @Insert("insert into procate(cate_name,create_time,update_time,pro_status) values(#{cateName},#{createTime},#{updateTime},#{proStatus}) ")
+	@AutoFill(value = OperationType.INSERT)
+    void add(ProCategory s);
 
 	//修改分類
+    @AutoFill(value = OperationType.UPDATE)
 	void update(ProCategory s);
 
 	//查詢該分類底下有無其他商品
@@ -43,5 +47,9 @@ public interface CategoryMapper {
 	//用Limit查詢
 	@Select("SELECT * FROM procate LIMIT #{start},#{pageSize}")
 	List<ProCategory> page(Integer start, Integer pageSize);
+
+	//用動態sql
+	List<Product> pageList(Integer cateId, Integer proId);
+
 
 }

@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.justshop.anno.AutoFill;
+import com.justshop.pojo.OperationType;
 import com.justshop.pojo.ShopUser;
 
 @Mapper
@@ -19,6 +21,7 @@ public interface UserMapper {
 	//註冊帳號
 	@Insert("insert into shopuser values(null,#{username},#{password},#{avatar},#{email},#{loginDate},"
 			+"#{status},#{role},#{createTime},#{updateTime},#{remark})")
+    @AutoFill(value = OperationType.INSERT)
 	void register(ShopUser user);
 
 	//用戶禁用(這是一般寫法)
@@ -26,6 +29,7 @@ public interface UserMapper {
 	//void status(Integer status, Integer id);
 	
 	//動態sql用戶禁用寫法
+	@AutoFill(value = OperationType.UPDATE)
 	void statusXml(ShopUser shopUser);
 
 

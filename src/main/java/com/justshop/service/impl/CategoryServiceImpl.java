@@ -1,11 +1,11 @@
 package com.justshop.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.justshop.mapper.CategoryMapper;
 import com.justshop.pojo.PageTotal;
 import com.justshop.pojo.ProCategory;
@@ -31,8 +31,8 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public void add(ProCategory s) {
-		s.setCreateTime(LocalDateTime.now());
-		s.setUpdateTime(LocalDateTime.now());
+		//s.setCreateTime(LocalDateTime.now());
+		//s.setUpdateTime(LocalDateTime.now());
 		s.setProStatus(1);
 		categoryMapper.add(s);
 	}
@@ -40,7 +40,7 @@ public class CategoryServiceImpl implements CategoryService{
 	//修改分類
 	@Override
 	public void update(ProCategory s) {
-		s.setUpdateTime(LocalDateTime.now());
+		//s.setUpdateTime(LocalDateTime.now());
 		categoryMapper.update(s);
 	}
 
@@ -60,13 +60,25 @@ public class CategoryServiceImpl implements CategoryService{
 
 	//分頁查詢
 	@Override
-	public PageTotal page(Integer pageNum, Integer pageSize) {
+	public PageTotal page(Integer pageNum, Integer pageSize, Integer cateId, Integer proId) {
+		/*傳統寫法
 		Long count = categoryMapper.count();
 		
 		Integer start = (pageNum - 1) * pageSize;
 		List<ProCategory> list = categoryMapper.page(start, pageSize);
 
 		PageTotal pageTotal = new PageTotal(count, list);
+		return pageTotal;
+		*/
+		//1.設定分頁參數
+		PageHelper.startPage(pageNum, pageSize);
+		
+		//2.執行查詢
+		List<Product> list = categoryMapper.pageList(cateId,proId);
+		com.github.pagehelper.Page<Product> page = (com.github.pagehelper.Page<Product>)list;
+		
+		//封裝
+		PageTotal pageTotal = new PageTotal(page.getTotal(),page.getResult());
 		return pageTotal;
 	}
 

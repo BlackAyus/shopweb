@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService{
 		  user.setLoginDate(LocalDateTime.now());
 		  user.setStatus(0);
 		  user.setRole(1);
-		  user.setCreateTime(LocalDateTime.now());
-		  user.setUpdateTime(LocalDateTime.now());
+		 // user.setCreateTime(LocalDateTime.now());
+		  //user.setUpdateTime(LocalDateTime.now());
 		  user.setRemark("測試帳號");
 		  user.setAvatar("handsome.jpg");
 		  userMapper.register(user);
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void status(Integer status, Integer id) {
 		ShopUser shopUser = new ShopUser();
-		shopUser.setUpdateTime(LocalDateTime.now());
+		//shopUser.setUpdateTime(LocalDateTime.now());
 		shopUser.setId(id);
 		shopUser.setStatus(status);
 		userMapper.statusXml(shopUser);

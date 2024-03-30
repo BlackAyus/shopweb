@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @CrossOrigin
 @RequestMapping("/admin/category")
-public class Category {
+public class CategoryController {
 
 	@Autowired
 	private CategoryService categoryService;
@@ -39,7 +39,7 @@ public class Category {
 	 */
 	@PostMapping("/add")
 	public Result addCategory(@RequestBody ProCategory s) {
-		// 1.先查詢商品有無重複
+		// 1.先查詢商品有無重複(返回的ProCategor s1之後也可以用在新增商品的商品分類中)
 		log.info("加入商品分類參數: {}", s);
 		ProCategory s1 = categoryService.selectCatName(s.getCateName());
 		if(s1 != null) {
@@ -51,14 +51,15 @@ public class Category {
 	
 	
 	/*
-	 * 分類分頁查詢
+	 * 分類分頁查詢，並可以根據商品分類(catId)與商品類型(proId)查詢
 	 */
 	@GetMapping("/page")
 	public Result pageList(@RequestParam(defaultValue = "1") Integer pageNum,
 			               @RequestParam(defaultValue = "5") Integer pageSize,
-			               @RequestParam(required = false) Integer cateId) {
+			               @RequestParam(required = false) Integer cateId,
+			               @RequestParam(required = false) Integer proId) {
 		log.info("分頁查詢參數: {},{},{}", pageNum, pageSize);
-		PageTotal pt = categoryService.page(pageNum,pageSize);
+		PageTotal pt = categoryService.page(pageNum,pageSize,cateId,proId);
 		log.info("分頁查詢結果: {}", pt);
 		return Result.success(pt);
 	}

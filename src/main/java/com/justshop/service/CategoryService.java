@@ -26,6 +26,9 @@ public interface CategoryService {
 	List<Product> list(Integer cateId);
 
 	//分頁查詢
-	PageTotal page(Integer pageNum, Integer pageSize);
+	PageTotal page(Integer pageNum, Integer pageSize, Integer cateId, Integer proId);
+
+	
+
 
 }

@@ -22,6 +22,23 @@
          
          where cate_id = #{cateId}
     </update>
+    
+    <select id="pageList" resultType="com.justshop.pojo.Product">
+     SELECT * FROM product
+         <where>
+		   <if test="cateId != null">
+			    cate_id = #{cateId}
+		   </if>
+		   
+		   <if test="proId != null">
+			    and pro_id = #{proId}
+		   </if>
+		   
+		  
+		 </where> 
+	   
+	   
+   </select> 
  
  
  </mapper> 
