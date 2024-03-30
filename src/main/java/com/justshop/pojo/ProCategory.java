@@ -7,23 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /*
- * 商品實體類
+ * 商品分類實體類
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Product {
-	
-	private Integer proId;
+@NoArgsConstructor
+public class ProCategory {
+
 	private Integer cateId;
-	private String prdName;
-	private String prdMainimage;
-	private String proImage;
-	private String detail;
-	private Double price;
-	private Integer stock;
-	private Integer status;
+	private String cateName;
 	private LocalDateTime createTime;
 	private LocalDateTime updateTime;
-
+	private Integer proStatus;
 }

@@ -44,4 +44,16 @@ public class UserServiceImpl implements UserService{
 		  userMapper.register(user);
 	}
 
+	//用戶禁用
+	@Override
+	public void status(Integer status, Integer id) {
+		ShopUser shopUser = new ShopUser();
+		shopUser.setUpdateTime(LocalDateTime.now());
+		shopUser.setId(id);
+		shopUser.setStatus(status);
+		userMapper.statusXml(shopUser);
+	}
+
+ 			
+
 }

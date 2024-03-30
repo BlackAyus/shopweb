@@ -12,4 +12,7 @@ public interface UserService {
 	//註冊用戶
 	void register(ShopUser user);
 
+	//用戶禁用
+	void status(Integer status, Integer id);
+
 }

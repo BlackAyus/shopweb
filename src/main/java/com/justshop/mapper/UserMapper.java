@@ -21,4 +21,12 @@ public interface UserMapper {
 			+"#{status},#{role},#{createTime},#{updateTime},#{remark})")
 	void register(ShopUser user);
 
+	//用戶禁用(這是一般寫法)
+	//@Update("updata shopuser set = #{status} where id =#{id}")
+	//void status(Integer status, Integer id);
+	
+	//動態sql用戶禁用寫法
+	void statusXml(ShopUser shopUser);
+
+
 }

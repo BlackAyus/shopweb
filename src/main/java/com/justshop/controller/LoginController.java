@@ -18,10 +18,11 @@ import com.justshop.pojo.ShopUser;
 import com.justshop.service.UserService;
 import com.justshop.utils.JwtUtils;
 import com.justshop.utils.Md5util;
+import com.justshop.utils.MessageConstant;
 
 import lombok.extern.slf4j.Slf4j;
 @RestController
-@RequestMapping("/shop")
+@RequestMapping("/shop/user")
 @Slf4j
 @CrossOrigin
 public class LoginController {
@@ -57,7 +58,7 @@ public class LoginController {
 			return Result.success(jwt);
 		}
 			
-		return Result.error("用戶名或密碼錯誤!");
+		return Result.error(MessageConstant.PASSWORD_ERROR);
 	}
 
 }

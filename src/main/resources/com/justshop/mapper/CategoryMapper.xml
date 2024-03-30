@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.justshop.mapper.CategoryMapper">
+ 
+ 
+    <update id="update" parameterType="com.justshop.pojo.ProCategory">
+         update procate
+         <set>
+             <if test="cateName != null">
+                  cate_name = #{cateName}, 
+             </if>
+             <if test="updateTime != null">
+                  update_time = #{updateTime}, 
+             </if>
+             <if test="proStatus != null">
+                  pro_status = #{proStatus}, 
+             </if>
+              
+         </set>
+         
+         where cate_id = #{cateId}
+    </update>
+ 
+ 
+ </mapper> 
