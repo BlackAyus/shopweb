@@ -3,7 +3,7 @@ package com.justshop.utils;
 /*
  * ThreadLocal工具類別
  */
-public class TheradLocalUitls {
+public class ThreadLocalUitls {
     //建立ThreadLocal物件
 	private static final ThreadLocal THREAD_LOCAL = new ThreadLocal();
 	

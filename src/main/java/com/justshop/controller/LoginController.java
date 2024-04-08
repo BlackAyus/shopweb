@@ -56,6 +56,7 @@ public class LoginController {
 			vo.set(jwt, jwt, 1, TimeUnit.HOURS);
 			log.info("已將JWT儲存到redis");
 			return Result.success(jwt);
+			
 		}
 			
 		return Result.error(MessageConstant.PASSWORD_ERROR);

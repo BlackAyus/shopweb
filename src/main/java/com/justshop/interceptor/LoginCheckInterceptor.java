@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.justshop.pojo.Result;
 import com.justshop.utils.JwtUtils;
-import com.justshop.utils.TheradLocalUitls;
+import com.justshop.utils.ThreadLocalUitls;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -71,7 +71,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 			Map<String, Object> claims = JwtUtils.parseJWT(jwt);
 			
 			//將解析過後的令牌存放到ThreadLocal物件
-			TheradLocalUitls.set(claims);
+			ThreadLocalUitls.set(claims);
 		} catch (Exception e) { 
 			e.printStackTrace();
 			log.info("解析令牌失敗，返回錯誤結果");
@@ -102,6 +102,6 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
 			    Object handler, Exception ex)throws Exception {
-		TheradLocalUitls.remove();
+		ThreadLocalUitls.remove();
 	}
 }

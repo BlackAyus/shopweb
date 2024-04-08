@@ -41,4 +41,20 @@ public class ProductServiceImpl implements ProductService{
 		return new PageTotal(page.getTotal(),page.getResult());
 	}
 
+	//刪除商品
+	@Override
+	public void del(List<Integer> proId) {
+	   productMapper.del(proId);	
+	}
+
+	@Override
+	public List<ProductVo> getProdoctVo() {
+		List<ProductVo> list = productMapper.getProductVo();
+		return list;
+	}
+
+	@Override
+	public void update(Product p) {
+		productMapper.update(p);	
+	}	
 }

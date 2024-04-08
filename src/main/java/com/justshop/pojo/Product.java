@@ -1,5 +1,6 @@
 package com.justshop.pojo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Product implements Serializable{
 	
 	private Integer proId;
 	private Integer cateId;
@@ -25,5 +26,6 @@ public class Product {
 	private Integer status;
 	private LocalDateTime createTime;
 	private LocalDateTime updateTime;
+	private Integer createId;
 
 }

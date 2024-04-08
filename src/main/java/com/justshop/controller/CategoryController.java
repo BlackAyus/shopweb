@@ -3,6 +3,8 @@ package com.justshop.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,9 @@ public class CategoryController {
 
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private RedisTemplate redisTemplate;
+
 	
 	/*
 	 * 新增商品分類
@@ -97,11 +102,42 @@ public class CategoryController {
 	
 	
 	
+//	/*
+//	 * 根據商品分類id查詢有哪些商品(比如電腦類型，底下有很多分類，筆如主機板、CPU)
+//	 */
+//	@GetMapping("/list")
+//	public Result list(@RequestParam Integer cateId) {
+//		/*
+//		 *  1.先查詢cateId有無在快取中，這裡定一個規則為商品分類id在redis的key值是[cate_動態id]
+//		 *   ，然後實體類要記得implements序列化不然會報錯
+//		 */
+//		String key = "cate_" + cateId;
+//		List<Product> list = (List<Product>)redisTemplate.opsForValue().get(key);
+//		if(list != null && list.size() > 0) {
+//			// 2.如果有查詢到，就直接返回
+//			return Result.success(list);
+//		}
+//		
+//		// 3.若未查詢到，就操作資料庫
+//		list = categoryService.list(cateId);
+//		log.info("查詢結果: {}", list);
+//		
+//		/*
+//		 *  4.將查詢到之結果放到redis，由於返回的是List集合，在redis是無法取用，惟因有序列化
+//		 *    故會先將List轉為redis可儲存的格式後(即redis的String類型)再儲存進去
+//		 */
+//		redisTemplate.opsForValue().set(key, list);
+//		return Result.success(list);
+//	}
+	
+	
 	/*
-	 * 根據商品類型查詢有哪些分類(比如電腦類型，底下有很多分類，筆如主機板、CPU)
+	 * 改良上述API => 使用Spring Cache
 	 */
+	@Cacheable(cacheNames = "setProduct", key = "#cateId")
 	@GetMapping("/list")
 	public Result list(@RequestParam Integer cateId) {
+		
 		List<Product> list = categoryService.list(cateId);
 		log.info("查詢結果: {}", list);
 		return Result.success(list);

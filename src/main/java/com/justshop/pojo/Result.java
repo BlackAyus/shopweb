@@ -1,5 +1,7 @@
 package com.justshop.pojo;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Result {
+public class Result implements Serializable{
 	private Integer code;   //1 成功, 0 失敗
 	private String message;     //提示內容
 	private Object data;    //資料數據

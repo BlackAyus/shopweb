@@ -18,6 +18,51 @@
           order by p.create_time desc
     
     </select>
+    
+    <delete id="del">
+	   
+	   delete from product where pro_id in
+	   <foreach collection="proId" item="ids" separator="," open="(" close=")">
+		   #{ids}
+	   </foreach>
+	   
+   </delete>	
  
- 
+   <update id="update" parameterType="com.justshop.pojo.ProductVo">
+         update product
+         <set>
+             <if test="prdName != null">
+                  prd_name = #{prdName}, 
+             </if>
+             <if test="price != null">
+                  price = #{price}, 
+             </if>
+             <if test="prdMainimage != null">
+                  prd_mainimage = #{prdMainimage}, 
+             </if>
+             <if test="proImage != null">
+                  pro_image = #{proImage}, 
+             </if>
+             <if test="detail != null">
+                  detail = #{detail}, 
+             </if>
+             <if test="stock != null">
+                  stock = #{stock}, 
+             </if>
+             <if test="status != null">
+                  status = #{status}, 
+             </if>
+             <if test="createTime != null">
+                  create_time = #{createTime}, 
+             </if>
+             <if test="updateTime != null">
+                  update_time  = #{updateTime}, 
+             </if>
+              <if test="createId != null">
+                  create_id  = #{createId}, 
+             </if>
+              
+         </set>
+         where pro_id = #{proId}
+    </update>
  </mapper>

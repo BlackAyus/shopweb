@@ -22,6 +22,7 @@ public class ProductVo implements Serializable{
 	private Integer status;
 	private LocalDateTime createTime;
 	private LocalDateTime updateTime;
+	private String createId;
 	
     private String cateName;
 }
