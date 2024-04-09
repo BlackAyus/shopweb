@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.justshop.mapper.AddressMapper">
+ 
+     <update id="update" parameterType="com.justshop.pojo.Address">
+        update address
+
+           <set>
+             <if test="name != null">
+                  name = #{name}, 
+             </if>
+             <if test="phone != null">
+                  phone = #{phone}, 
+             </if>
+             <if test="adres != null">
+                  adres = #{adres}, 
+             </if>
+             <if test="updateTime != null">
+                  update_time = #{updateTime}, 
+             </if>
+             <if test="addDefault != null">
+                  add_default = #{addDefault} 
+             </if>           
+         </set>
+      
+            where add_id = #{addId} and user_id = #{userId}
+     
+     </update>
+    
+
+ </mapper>

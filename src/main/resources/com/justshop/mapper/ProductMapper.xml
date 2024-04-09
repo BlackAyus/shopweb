@@ -4,6 +4,19 @@
   
  <mapper namespace="com.justshop.mapper.ProductMapper">
  
+    <select id="getById" resultType="com.justshop.pojo.Product">
+        SELECT * from product
+       
+        <where>
+             <if test="proId != null">and pro_id = #{proId}</if>
+                     
+        </where>
+    
+    </select>
+ 
+ 
+   
+ 
     <select id="pageList" resultType="com.justshop.pojo.ProductVo">
         SELECT p.* , c.cate_name FROM product p LEFT JOIN procate c ON p.cate_id = c.cate_id
        

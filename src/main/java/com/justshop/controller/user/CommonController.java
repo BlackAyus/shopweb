@@ -1,4 +1,4 @@
-package com.justshop.controller;
+package com.justshop.controller.user;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

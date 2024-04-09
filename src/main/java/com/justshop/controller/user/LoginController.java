@@ -1,4 +1,4 @@
-package com.justshop.controller;
+package com.justshop.controller.user;
 
 import java.util.HashMap;
 import java.util.Map;

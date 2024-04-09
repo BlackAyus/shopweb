@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Override
 	public List<Product> proList() {
-		List<Product> list = productMapper.proList();
+		List<Product> list = productMapper.list();
 		return list;
 	}
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.justshop.anno.AutoFill;
+import com.justshop.pojo.Cart;
 import com.justshop.pojo.OperationType;
 import com.justshop.pojo.Product;
 import com.justshop.pojo.ProductPageQueryDTO;
@@ -15,9 +16,8 @@ import com.justshop.pojo.ProductVo;
 @Mapper
 public interface ProductMapper {
 
-	//查詢商品清單
-	@Select("select * from product")
-	List<Product> proList();
+	//查詢商品全部清單
+	List<Product> list();
 
 	//新增商品
 	@Insert("insert into product(cate_id,prd_name,prd_mainimage,pro_image,detail,price,stock,status,create_time,update_time,create_id)"
@@ -38,6 +38,9 @@ public interface ProductMapper {
 	
 	@AutoFill(value = OperationType.UPDATE)
 	void update(Product p);
+
+	//查詢商品表(用動態sql, 可where proId)
+	Product getById(Cart c);
 
 	
 
